@@ -5,15 +5,18 @@ import datetime
 TOKEN = '1971830852:AAFcBsCGYQC1NIVsER1sjnvLV5AnWN7OHxU'
 
 bot = telebot.TeleBot(TOKEN)
-CHAT_ID = '556470836'
+CHAT_ID = '-1001300589546'
 
 
 def date_to_str(dt):
     minute = int(5 * round(dt.minute / 5))
     hours = dt.hour
     if minute == 60:
-        hours += 1 and minute == '00'
-    result_time = ":".join([str(hours), str(minute)])
+        hours += 1
+        minute = 0
+    if hours == 24:
+        hours = 0
+    result_time = ":".join([str(hours), ('0' if minute < 10 else '') + str(minute)])
     print(result_time)
     return result_time
 
@@ -38,9 +41,10 @@ def get_dates_to_show(data_str):
 def send():
     real_date, comfort_date = get_dates()
     with open(f"{comfort_date.strftime('%d-%m-%Y')}.txt", "rb") as file:
-        bot.send_message(CHAT_ID,
-                         str(comfort_date.strftime('%d\%m\%Y')) + '\n---------\n' + '\n'.join(
-                             get_dates_to_show(file.read().decode())))
+        bot.send_message(chat_id=CHAT_ID,
+                         text='<b>'+str(comfort_date.strftime('%d/%m/%Y')) + '</b>\n---------\n' + '\n'.join(
+                             get_dates_to_show(file.read().decode())),
+                         parse_mode='HTML')
 
 
 if __name__ == '__main__':

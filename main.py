@@ -12,9 +12,8 @@ def get_dates():
 
 def main(key_event):
     real_date, comfort_date = get_dates()
-    if key_event.event_type == 'down':
-        with open(comfort_date.strftime('%d-%m-%Y') + '.txt', 'a') as file:
-            file.write(str(real_date) + '\n')
+    with open(comfort_date.strftime('%d-%m-%Y') + '.txt', 'a') as file:
+        file.write(str(real_date) + '\n')
 
 
 if __name__ == '__main__':
