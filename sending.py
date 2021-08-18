@@ -11,6 +11,9 @@ bot = telebot.TeleBot(TOKEN)
 CHAT_ID = os.environ.get("CHAT_ID", '-1001300589546')
 real_date, comfort_date, readable_date = get_dates()
 
+def hm_show(hours, minutes):
+    return ":".join([('0' if hours < 10 else '') + str(hours), ('0' if minutes < 10 else '') + str(minutes)])
+
 
 def date_to_str(dt):
     minute = int(5 * round(dt.minute / 5))
@@ -20,9 +23,7 @@ def date_to_str(dt):
         minute = 0
     if hours == 24:
         hours = 0
-    result_time = ":".join([str(hours), ('0' if minute < 10 else '') + str(minute)])
-    print(result_time)
-    return result_time
+    return hm_show(hours, minute)
 
 
 def myround(x, base=5):
