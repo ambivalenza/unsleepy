@@ -5,7 +5,8 @@ import datetime
 TOKEN = '1971830852:AAFcBsCGYQC1NIVsER1sjnvLV5AnWN7OHxU'
 
 bot = telebot.TeleBot(TOKEN)
-CHAT_ID = '-1001300589546'
+# CHAT_ID = '-1001300589546'
+CHAT_ID = '556470836'
 real_date, comfort_date = get_dates()
 
 
@@ -31,7 +32,7 @@ def get_dates_to_show(data_str):
     for date_str in data_str.split("\r\n"):
         if not date_str:
             return
-        date = datetime.datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S.%f")
+        date = datetime.datetime.strptime(date_str, "%H:%M:%S.%f %d-%m-%Y")
         if prev_date and date - prev_date < datetime.timedelta(minutes=5):
             continue
 
