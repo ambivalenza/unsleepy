@@ -11,8 +11,8 @@ def tconv(x):
     return time.strftime("%H:%M:%S %d-%m-%Y", time.localtime(x))
 
 
-@bot.message_handler(commands='call')
-def call(message):
+@bot.message_handler(commands='get')
+def get(message):
     text = ''
     with open(f"{comfort_date.strftime('%d-%m-%Y')}.txt", "rb") as file:
         text += '<b>' + str(comfort_date.strftime('%d/%m/%Y')) + '</b>\n---------\n' + '\n'.join(

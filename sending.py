@@ -1,12 +1,13 @@
 import telebot
 from main import get_dates
 import datetime
+import os
 
 TOKEN = '1971830852:AAFcBsCGYQC1NIVsER1sjnvLV5AnWN7OHxU'
 
 bot = telebot.TeleBot(TOKEN)
-# CHAT_ID = '-1001300589546'
-CHAT_ID = '556470836'
+
+CHAT_ID = os.environ.get("CHAT_ID", '-1001300589546')
 real_date, comfort_date, readable_date = get_dates()
 
 
@@ -32,7 +33,7 @@ def get_dates_to_show(data_str):
     for date_str in data_str.split("\r\n"):
         if not date_str:
             return
-        date = datetime.datetime.strptime(date_str, "%H:%M:%S.%f %d-%m-%Y")
+        date = datetime.datetime.strptime(date_str, "%H:%M:%S %d-%m-%Y")
         if prev_date and date - prev_date < datetime.timedelta(minutes=5):
             continue
 
