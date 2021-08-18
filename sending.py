@@ -7,6 +7,7 @@ TOKEN = '1971830852:AAFcBsCGYQC1NIVsER1sjnvLV5AnWN7OHxU'
 
 bot = telebot.TeleBot(TOKEN)
 
+
 CHAT_ID = os.environ.get("CHAT_ID", '-1001300589546')
 real_date, comfort_date, readable_date = get_dates()
 
@@ -37,15 +38,15 @@ def get_dates_to_show(data_str):
         if prev_date and date - prev_date < datetime.timedelta(minutes=5):
             continue
 
-        yield date_to_str(date)
+        yield date
         prev_date = date
 
 
 def send():
     with open(f"{comfort_date.strftime('%d-%m-%Y')}.txt", "rb") as file:
+        dates_str = [date_to_str(dt) for dt in get_dates_to_show(file.read().decode())]
         bot.send_message(chat_id=CHAT_ID,
-                         text='<b>' + str(comfort_date.strftime('%d/%m/%Y')) + '</b>\n---------\n' + '\n'.join(
-                             get_dates_to_show(file.read().decode())),
+                         text='<b>' + str(comfort_date.strftime('%d/%m/%Y')) + '</b>\n---------\n' + '\n'.join(dates_str),
                          parse_mode='HTML')
 
 
