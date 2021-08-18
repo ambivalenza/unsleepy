@@ -7,7 +7,7 @@ TOKEN = '1971830852:AAFcBsCGYQC1NIVsER1sjnvLV5AnWN7OHxU'
 bot = telebot.TeleBot(TOKEN)
 # CHAT_ID = '-1001300589546'
 CHAT_ID = '556470836'
-real_date, comfort_date = get_dates()
+real_date, comfort_date, readable_date = get_dates()
 
 
 def date_to_str(dt):
